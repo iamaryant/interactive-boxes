@@ -101,71 +101,95 @@ function App() {
   };
 
   return (
-    <Container maxWidth='md' sx={{ py: 4 }}>
+    <Container maxWidth="sm" sx={{ py: 4 }}>
       {/* Input Section */}
-      <Stack sx={{ width: '100%', justifyContent: 'center', alignItems: 'center', mb: 4 }} direction='column' spacing={2}>
+      <Stack
+        sx={{
+          width: '100%',
+          justifyContent: 'center',
+          alignItems: 'center',
+          mb: 4,
+          gap: 2,
+        }}
+        direction="column"
+      >
         <TextField
-          label='Enter number (5-25)'
-          variant='outlined'
+          label="Enter number (5-25)"
+          variant="outlined"
           value={inputValue}
           onChange={handleInputChange}
           onKeyDown={handleKeyPress}
           error={!!error}
           helperText={error}
-          sx={{ width: 300 }}
+          sx={{
+            width: { xs: '100%', sm: 300 },
+          }}
         />
-        <Button variant='contained' onClick={() => validateAndGenerate()}>Generate</Button>
+        <Button
+          variant="contained"
+          onClick={() => validateAndGenerate()}
+          sx={{ width: { xs: '100%', sm: 300 } }}
+        >
+          Generate
+        </Button>
       </Stack>
 
       {/* C Shape Display */}
-      <Stack sx={{ width: '100%', justifyContent: 'center', alignItems: 'center'}} direction='row'>
-      <Box
+      <Stack
         sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'flex-start',
+          width: '100%',
           justifyContent: 'center',
-          gap: '5px',
+          alignItems: 'center',
         }}
+        direction="row"
       >
-        {rows.length > 0 &&
-          rows.map((row, rowIndex) => (
-            <Box
-              key={rowIndex}
-              sx={{
-                display: 'flex',
-                flexDirection: 'row',
-                gap: '5px',
-                minHeight: 50,
-              }}
-            >
-              {row.map((box) => (
-                <Box
-                  key={box.id}
-                  onClick={() => handleBoxClick(box.id)}
-                  sx={{
-                    width: 50,
-                    height: 50,
-                    backgroundColor: clickedBoxes.has(box.id)
-                      ? '#4caf50'
-                      : '#d32f2f',
-                    border: `2px solid ${
-                      clickedBoxes.has(box.id) ? '#2e7d32' : '#b71c1c'
-                    }`,
-                    borderRadius: '4px',
-                    boxShadow: '0 2px 4px rgba(0,0,0,0.2)',
-                    cursor: 'pointer',
-                    transition: 'all 0.2s ease-in-out',
-                    '&:hover': {
-                      transform: 'scale(1.05)',
-                      boxShadow: '0 4px 8px rgba(0,0,0,0.3)',
-                    },
-                  }}
-                />
-              ))}
-            </Box>
-          ))}
-      </Box>
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'flex-start',
+            justifyContent: 'center',
+            gap: { xs: '2px', sm: '5px' },
+          }}
+        >
+          {rows.length > 0 &&
+            rows.map((row, rowIndex) => (
+              <Box
+                key={rowIndex}
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  gap: { xs: '2px', sm: '5px' },
+                  flexWrap: 'no-wrap',
+                }}
+              >
+                {row.map((box) => (
+                  <Box
+                    key={box.id}
+                    onClick={() => handleBoxClick(box.id)}
+                    sx={{
+                      width: { xs: 25, sm: 50 },
+                      height: { xs: 25, sm: 50 },
+                      backgroundColor: clickedBoxes.has(box.id)
+                        ? '#4caf50'
+                        : '#d32f2f',
+                      border: `2px solid ${
+                        clickedBoxes.has(box.id) ? '#2e7d32' : '#b71c1c'
+                      }`,
+                      borderRadius: '4px',
+                      boxShadow: '0 2px 4px rgba(0,0,0,0.2)',
+                      cursor: 'pointer',
+                      transition: 'all 0.2s ease-in-out',
+                      '&:hover': {
+                        transform: 'scale(1.05)',
+                        boxShadow: '0 4px 8px rgba(0,0,0,0.3)',
+                      },
+                    }}
+                  />
+                ))}
+              </Box>
+            ))}
+        </Box>
       </Stack>
     </Container>
   );
